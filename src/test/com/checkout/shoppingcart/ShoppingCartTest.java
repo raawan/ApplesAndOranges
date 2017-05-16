@@ -26,6 +26,12 @@ public class ShoppingCartTest {
         assert shoppingCart.getTotalBill() == 85;
     }
 
+    @Test
+    public void GIVEN_1orangeAnd3Apples_THEN_totalcost2pound5pence() {
+        ShoppingCart shoppingCart = new ShoppingCart(createShoppingBasketItems(APPLE,APPLE,APPLE,ORANGE));
+        assert shoppingCart.getTotalBill() == 2.05;
+    }
+
     private List<ShoppingCart.Fruit> createShoppingBasketItems(ShoppingCart.Fruit... items) {
         return Arrays.asList(items);
     }
