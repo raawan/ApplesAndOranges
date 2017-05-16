@@ -65,6 +65,15 @@ public class OfferTest {
         assert totalbill.equals(new BigDecimal("2.20"));
     }
 
+    @Test
+    public void GIVEN_4applesAnd1orange_THEN_totalcost1pound45pence() {
+        ShoppingCart shoppingCart = new ShoppingCart(
+                createShoppingBasketItems(APPLE,APPLE,APPLE,APPLE,
+                        ORANGE));
+        BigDecimal totalbill = shoppingCart.getTotalBill();
+        assert totalbill.equals(new BigDecimal("1.45"));
+    }
+
     private List<ShoppingCart.Fruit> createShoppingBasketItems(ShoppingCart.Fruit... items) {
         return Arrays.asList(items);
     }
