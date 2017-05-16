@@ -3,6 +3,7 @@ package com.checkout.shoppingcart;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static com.checkout.shoppingcart.ShoppingCart.Fruit.*;
@@ -32,6 +33,21 @@ public class ShoppingCartTest {
     public void GIVEN_1orangeAnd3Apples_THEN_totalcost2pound5pence() {
         ShoppingCart shoppingCart = new ShoppingCart(createShoppingBasketItems(APPLE,APPLE,APPLE,ORANGE));
         assert shoppingCart.getTotalBill().equals(new BigDecimal("2.05"));
+    }
+
+    @Test
+    public void GIVEN_1000Apples_THEN_totalcost600pounds() {
+        ShoppingCart shoppingCart = new ShoppingCart(createBasketWith1000Apples());
+        assert shoppingCart.getTotalBill().equals(new BigDecimal("600.00"));
+    }
+
+
+    private List<ShoppingCart.Fruit> createBasketWith1000Apples() {
+        List<ShoppingCart.Fruit> apples = new ArrayList<>();
+        for(int i =0;i<1000;i++) {
+            apples.add(APPLE);
+        }
+        return apples;
     }
 
     private List<ShoppingCart.Fruit> createShoppingBasketItems(ShoppingCart.Fruit... items) {
