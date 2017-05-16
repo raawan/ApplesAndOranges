@@ -4,6 +4,7 @@ package com.checkout.shoppingcart;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,7 +75,23 @@ public class OfferTest {
         assert totalbill.equals(new BigDecimal("1.45"));
     }
 
+
+    @Test
+    public void GIVEN_1000Apples_THEN_totalcost300pounds() {
+        ShoppingCart shoppingCart = new ShoppingCart(createBasketWith1000Apples());
+        assert shoppingCart.getTotalBill().equals(new BigDecimal("300.00"));
+    }
+
+
     private List<ShoppingCart.Fruit> createShoppingBasketItems(ShoppingCart.Fruit... items) {
         return Arrays.asList(items);
+    }
+
+    private List<ShoppingCart.Fruit> createBasketWith1000Apples() {
+        List<ShoppingCart.Fruit> apples = new ArrayList<>();
+        for(int i =0;i<1000;i++) {
+            apples.add(APPLE);
+        }
+        return apples;
     }
 }
