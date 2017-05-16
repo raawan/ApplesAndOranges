@@ -34,6 +34,13 @@ public class OfferTest {
         assert totalbill.equals(new BigDecimal("00.75"));
     }
 
+    @Test
+    public void GIVEN_1oranges_THEN_totalcost25p() {
+        ShoppingCart shoppingCart = new ShoppingCart(createShoppingBasketItems(ORANGE));
+        BigDecimal totalbill = shoppingCart.getTotalBill();
+        assert totalbill.equals(new BigDecimal("00.25"));
+    }
+
     private List<ShoppingCart.Fruit> createShoppingBasketItems(ShoppingCart.Fruit... items) {
         return Arrays.asList(items);
     }
