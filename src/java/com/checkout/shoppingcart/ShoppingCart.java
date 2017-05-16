@@ -3,6 +3,10 @@ package com.checkout.shoppingcart;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.partitioningBy;
 
 public class ShoppingCart {
 
@@ -23,26 +27,27 @@ public class ShoppingCart {
 
     public BigDecimal getTotalBill() {
         BigDecimal totalBills  = new BigDecimal("0.00");
-        int countApple =0;
-        int countOranges = 0;
-        for(Fruit fruit : fruits) {
-            if(fruit.equals(Fruit.APPLE)) countApple++;
-            if(fruit.equals(Fruit.ORANGE)) countOranges++;
-        }
+        Map<Boolean,Long> partitionFruits =
+                fruits.stream()
+                        .collect(
+                                partitioningBy( fruit -> fruit.equals(Fruit.APPLE),
+                                        counting()));
 
-        return totalBills.add(getApplesCost(countApple)).add(getOrangesCost(countOranges));
+        long totalApples = partitionFruits.get(true);
+        long totalOranges = partitionFruits.get(false);
+
+        return totalBills.add(getApplesCost(totalApples)).add(getOrangesCost(totalOranges));
     }
 
-    private BigDecimal getOrangesCost(int countOranges) {
-        int orangesToDiscount = countOranges / ORANGES_TO_DISCOUNT;
-        int totalOrangesToCharge = (orangesToDiscount*2) + (countOranges%ORANGES_TO_DISCOUNT);
-        return new BigDecimal(Integer.valueOf(totalOrangesToCharge)).multiply(Fruit.ORANGE.cost);
+    private BigDecimal getOrangesCost(long countOranges) {
+        long orangesToDiscount = countOranges / ORANGES_TO_DISCOUNT;
+        long totalOrangesToCharge = (orangesToDiscount*2) + (countOranges%ORANGES_TO_DISCOUNT);
+        return new BigDecimal(Long.valueOf(totalOrangesToCharge)).multiply(Fruit.ORANGE.cost);
     }
 
-    private BigDecimal getApplesCost(int countApple) {
-        int appletodiscount = countApple / APPLES_TO_DISCOUNT;
-        int totalApplestoCharge = appletodiscount + (countApple%APPLES_TO_DISCOUNT);
-        return new BigDecimal(Integer.valueOf(totalApplestoCharge)).multiply(Fruit.APPLE.cost);
+    private BigDecimal getApplesCost(long countApple) {
+        long appletodiscount = countApple / APPLES_TO_DISCOUNT;
+        long totalApplestoCharge = appletodiscount + (countApple%APPLES_TO_DISCOUNT);
+        return new BigDecimal(Long.valueOf(totalApplestoCharge)).multiply(Fruit.APPLE.cost);
     }
-
 }
