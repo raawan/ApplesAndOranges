@@ -10,4 +10,10 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
         assert shoppingCart.getTotalBill("Apple") == 60;
     }
+
+    @Test
+    public void GIVEN_1orange_THEN_totalcost25p() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        assert shoppingCart.getTotalBill("Orange") == 25;
+    }
 }
