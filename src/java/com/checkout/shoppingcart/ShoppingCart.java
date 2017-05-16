@@ -28,9 +28,13 @@ public class ShoppingCart {
         }
         int appletodiscount = countApple / 2;
         int totalApplestoCharge = appletodiscount + (countApple%2);
-
         BigDecimal totalAppleCharges = new BigDecimal(Integer.valueOf(totalApplestoCharge)).multiply(Fruit.APPLE.cost);
         totalBills = totalBills.add(totalAppleCharges);
+
+        int orangesToDiscount = countOranges / 3;
+        int totalOrangesToCharge = (orangesToDiscount*2) + (countOranges%3);
+        BigDecimal totalOrangesCharges = new BigDecimal(Integer.valueOf(totalOrangesToCharge)).multiply(Fruit.ORANGE.cost);
+        totalBills = totalBills.add(totalOrangesCharges);
 
         return totalBills;
     }
