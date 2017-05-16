@@ -11,20 +11,20 @@ public class ShoppingCartTest {
 
     @Test
     public void GIVEN_1Apple_THEN_totalcost60p() {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        assert shoppingCart.getTotalBill(createShoppingBasketItems("Apple")) == 60;
+        ShoppingCart shoppingCart = new ShoppingCart(createShoppingBasketItems("Apple"));
+        assert shoppingCart.getTotalBill() == 60;
     }
 
     @Test
     public void GIVEN_1orange_THEN_totalcost25p() {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        assert shoppingCart.getTotalBill(createShoppingBasketItems("Orange")) == 25;
+        ShoppingCart shoppingCart = new ShoppingCart(createShoppingBasketItems("Orange"));
+        assert shoppingCart.getTotalBill() == 25;
     }
 
     @Test
     public void GIVEN_1orangeAnd1Apple_THEN_totalcost85p() {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        assert shoppingCart.getTotalBill(createShoppingBasketItems("Apple","Orange")) == 85;
+        ShoppingCart shoppingCart = new ShoppingCart(createShoppingBasketItems("Apple","Orange"));
+        assert shoppingCart.getTotalBill() == 85;
     }
 
     private List<String> createShoppingBasketItems(String... items) {
