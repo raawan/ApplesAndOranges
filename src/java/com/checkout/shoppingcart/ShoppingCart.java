@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ShoppingCart {
 
+    private static final int ORANGES_TO_DISCOUNT = 3;
+    private static final int APPLES_TO_DISCOUNT = 2;
     enum Fruit {
         APPLE(new BigDecimal("00.60")),ORANGE(new BigDecimal("00.25"));
         private BigDecimal cost;
@@ -13,6 +15,7 @@ public class ShoppingCart {
             this.cost=cost;
         }
     }
+
     private List<Fruit> fruits;
     ShoppingCart(List<Fruit> fruits) {
         this.fruits=fruits;
@@ -31,14 +34,14 @@ public class ShoppingCart {
     }
 
     private BigDecimal getOrangesCost(int countOranges) {
-        int orangesToDiscount = countOranges / 3;
-        int totalOrangesToCharge = (orangesToDiscount*2) + (countOranges%3);
+        int orangesToDiscount = countOranges / ORANGES_TO_DISCOUNT;
+        int totalOrangesToCharge = (orangesToDiscount*2) + (countOranges%ORANGES_TO_DISCOUNT);
         return new BigDecimal(Integer.valueOf(totalOrangesToCharge)).multiply(Fruit.ORANGE.cost);
     }
 
     private BigDecimal getApplesCost(int countApple) {
-        int appletodiscount = countApple / 2;
-        int totalApplestoCharge = appletodiscount + (countApple%2);
+        int appletodiscount = countApple / APPLES_TO_DISCOUNT;
+        int totalApplestoCharge = appletodiscount + (countApple%APPLES_TO_DISCOUNT);
         return new BigDecimal(Integer.valueOf(totalApplestoCharge)).multiply(Fruit.APPLE.cost);
     }
 
